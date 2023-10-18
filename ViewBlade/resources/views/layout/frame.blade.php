@@ -19,6 +19,8 @@
       <li class="active">
       <li><a href="{{ route('contact') }}">CONTACT</a></li>
       <li><a href="{{ route('about') }}">ABOUT US</a></li>
+      <li><a href="{{ route('getdata') }}">GETDATA</a></li>
+      <li><a href="{{ route('passdata') }}">PASSDATA</a></li>
     </ul>
   </div>
 </nav>
