@@ -7,6 +7,7 @@
         }
         textarea{
             height: 50px;
+            widows: 300px;
         }
         .error{
             border: 2px solid red;
@@ -30,8 +31,15 @@
             </div>
             <div class="div">
                 <label for="email">EMAIL</label><br>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" class="@error('email') error @enderror">
+                <input type="text" name="email" id="email" value="{{ old('email') }}" class="@error('email') error @enderror">
                 @error('email')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="div">
+                <label for="date_of_birth">DATE OF BIRTH</label><br>
+                <input type="text" name="date_of_birth" id="dob" placeholder="YYYY-MM-DD only Valid" value="{{ old('date_of_birth') }}" class="@error('email') error @enderror">
+                @error('date_of_birth')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
