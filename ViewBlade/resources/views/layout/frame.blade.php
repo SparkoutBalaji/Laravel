@@ -23,6 +23,8 @@
       <li><a href="{{ route('passdata') }}">PASSDATA</a></li>
       <li><a href="{{ route('login') }}">LOGIN</a></li>
       <li><a href="{{ route('upload') }}">UPLOAD FILE</a></li>
+      <li><a href="{{ route('form') }}">FORM</a></li>
+
 
     </ul>
   </div>

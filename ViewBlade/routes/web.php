@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\LoadDataController;
 use App\Http\Controllers\LoginFormController;
 use App\Http\Controllers\UploadController;
@@ -32,3 +33,6 @@ Route::post('/login',[LoginFormController::class,'login'])->name('/login');
 
 Route::view('/upload','upload')->name('upload');
 Route::post('/upload',[UploadController::class,'upload']);
+
+Route::get('/form',[FormController::class,'index'])->name('form');
+Route::post('/form/store',[FormController::class,'store'])->name('/form/store');
