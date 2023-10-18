@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoadDataController;
 use App\Http\Controllers\LoginFormController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 
@@ -26,5 +27,8 @@ Route::view('/contact','contact')->name('contact');
 Route::get('/getdata',[LoadDataController::class,'getdata'])->name('getdata');
 Route::get('/passdata',[LoadDataController::class,'passdata'])->name('passdata');
 
-ROUTE::view('/login','login');
-Route::post('/login',[LoginFormController::class,'login']);
+Route::view('/login','login')->name('login');
+Route::post('/login',[LoginFormController::class,'login'])->name('/login');
+
+Route::view('/upload','upload')->name('upload');
+Route::post('/upload',[UploadController::class,'upload']);

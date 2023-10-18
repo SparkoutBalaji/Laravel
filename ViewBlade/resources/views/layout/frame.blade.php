@@ -21,6 +21,9 @@
       <li><a href="{{ route('about') }}">ABOUT US</a></li>
       <li><a href="{{ route('getdata') }}">GETDATA</a></li>
       <li><a href="{{ route('passdata') }}">PASSDATA</a></li>
+      <li><a href="{{ route('login') }}">LOGIN</a></li>
+      <li><a href="{{ route('upload') }}">UPLOAD FILE</a></li>
+
     </ul>
   </div>
 </nav>
