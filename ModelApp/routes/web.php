@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +12,26 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//Select, Insert, Update, Delete from SQL Raw Queries
+Route::get('/read', function()
+{
+   return DB::select('select * from user');
+});
+
+Route::get('/insert', function(){
+    DB::insert('insert into user(id,name,email,password) values(?,?,?,?)',[112,'BALAJI N','balaji.n@sparkouttech.com','Balaji@SparkOutTech']);
+    return DB::select('select * from user');
+});
+
+Route::get('/update',function(){
+    DB::update('update user set role=2 where id=?',[112]);
+    return DB::select('select * from user');
+});
+
+Route::get('/delete', function(){
+    DB::delete('delete from user where id=?',[112]);
+    return DB::select('select * from user');
+});
 
 
