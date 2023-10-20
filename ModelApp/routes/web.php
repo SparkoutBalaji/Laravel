@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +28,7 @@ Route::get('/insert', function(){
 });
 
 Route::get('/update',function(){
-    DB::update('update user set role=2 where id=?',[112]);
+    DB::update('update user set id=112 where name=?',['SHEIK DAWOODU']);
     return DB::select('select * from user');
 });
 
@@ -34,4 +37,7 @@ Route::get('/delete', function(){
     return DB::select('select * from user');
 });
 
-
+//Controller for create(insert), Show, Index
+Route::get('/user/create',[UserController::class,'create']);
+Route::get('/user/show',[UserController::class,'show']);
+Route::get('/user/index',[UserController::class,'index']);
