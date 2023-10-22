@@ -61,5 +61,20 @@ Route::get('/data', function(){
 //view Component
 Route::view('/component','component');
 
+//view : if-statement in view
+Route::get('/if',function(){
+    $country = "AMERICA";
+    return view('if_statement', compact('country'));
+});
+
+//view : switch case
+Route::get('/switch',function(){
+    $status = "";
+    return view('switchCase',compact('status'));
+});
+
+//view : loops
+Route::view('/loops','loops');
+
 
 
