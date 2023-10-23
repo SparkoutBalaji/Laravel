@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Middleware\age;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +77,9 @@ Route::get('/switch',function(){
 
 //view : loops
 Route::view('/loops','loops');
+
+//middleware resirect by age - Global Middleware
+Route::view('middleware','middleware')->middleware('age');
 
 
 
