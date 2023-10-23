@@ -2,7 +2,8 @@
 
 use App\Http\Middleware\age;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,5 +82,21 @@ Route::view('/loops','loops');
 //middleware resirect by age - Global Middleware
 Route::view('middleware','middleware')->middleware('age');
 
+//for session
+Route::get('/sessionStore', function(Request $request){
+    // $request->session()->put('name','BALAJI N');
+    // $request->session()->put('mail','balaji.n@sparkouttech.com');
+    session([
+        'name'=>'SHEIK DAWOODU',
+        'mail'=>'sheikdawoodu@sparkouttech.com'
+    ]);
+    $request->session()->flash('mobile',8012964843);
+});
+Route::get('/session', function(){
+    dd(session()->all());
+});
+Route::get('/accesssession', function(){
+    echo session('mobile');
+});
 
 
