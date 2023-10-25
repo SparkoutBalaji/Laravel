@@ -84,19 +84,24 @@ Route::view('middleware','middleware')->middleware('age');
 
 //for session
 Route::get('/sessionStore', function(Request $request){
-    // $request->session()->put('name','BALAJI N');
-    // $request->session()->put('mail','balaji.n@sparkouttech.com');
+    $request->session()->put('name','BALAJI N');
+    $request->session()->put('mail','balaji.n@sparkouttech.com');
     session([
         'name'=>'SHEIK DAWOODU',
         'mail'=>'sheikdawoodu@sparkouttech.com'
     ]);
-    $request->session()->flash('mobile',8012964843);
+    $request->session()->flash('mobile',8012964843);                //temporary data
 });
 Route::get('/session', function(){
     dd(session()->all());
 });
 Route::get('/accesssession', function(){
     echo session('mobile');
+});
+Route::get('/deleteSession', function(Request $request){
+    //$request->session()->forget('name');              //specif field delete
+    //$request->session()->forget(['name','mail']);     //contained fields delete
+    $request->session()->flush();                       //delete entire sessions without previous : url :-)
 });
 
 
