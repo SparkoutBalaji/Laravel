@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\age;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -90,7 +91,7 @@ Route::get('/sessionStore', function(Request $request){
         'name'=>'SHEIK DAWOODU',
         'mail'=>'sheikdawoodu@sparkouttech.com'
     ]);
-    $request->session()->flash('mobile',8012964843);                //temporary data
+    //$request->session()->flash('mobile',8012964843);                //temporary data
 });
 Route::get('/session', function(){
     dd(session()->all());
@@ -103,5 +104,9 @@ Route::get('/deleteSession', function(Request $request){
     //$request->session()->forget(['name','mail']);     //contained fields delete
     $request->session()->flush();                       //delete entire sessions without previous : url :-)
 });
+
+//resource
+Route::resource('users',UserController::class);
+
 
 
