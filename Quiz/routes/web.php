@@ -13,12 +13,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //return redirect()->view('auth.login');
-    //return "<h2>Welcome To Quiz</h2>";
-    return view('auth.login');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
