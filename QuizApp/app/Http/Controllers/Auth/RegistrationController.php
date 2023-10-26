@@ -15,7 +15,7 @@ class RegistrationController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required',
-                'password' => 'required|confirmed'
+                'password' => 'required|confirmed',
             ]
             );
             $user = new User;

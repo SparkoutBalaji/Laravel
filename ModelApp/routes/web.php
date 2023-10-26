@@ -28,7 +28,7 @@ Route::get('/insert', function(){
 });
 
 Route::get('/update',function(){
-    DB::update('update user set id=112 where name=?',['SHEIK DAWOODU']);
+    DB::update('update user set role=1 where id=?',[112]);
     return DB::select('select * from user');
 });
 

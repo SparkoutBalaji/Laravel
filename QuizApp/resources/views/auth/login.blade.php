@@ -11,3 +11,5 @@
     <input type="submit" value="LOGIN">
     @csrf
 </form>
+
+<a href="{{ route('register') }}">Register</a>
