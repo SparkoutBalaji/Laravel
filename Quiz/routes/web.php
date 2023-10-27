@@ -21,5 +21,6 @@ Route::post('/register/user',[CustomAuthController::class,'register_user'])->nam
 Route::post('/authentication/user',[CustomAuthController::class,'authentication'])->name('authentication.user');
 Route::view('/admin/panel','adminpanel')->name('admin.panel');
 Route::view('/questions/list','questions')->name('q.a');
-Route::view('/create/questions','create_questions')->name('create.questions');
+Route::view('/create/questions','createquestions')->name('create.questions');
 Route::view('/questions/list','questionslist')->name('questions.list');
+
