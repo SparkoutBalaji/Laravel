@@ -5,7 +5,7 @@
         border: 1px solid black;
         text-align: center;
     }
-    button {
+    button {s
         text-align: center;
     }
     .button {
