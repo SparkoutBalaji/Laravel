@@ -5,7 +5,7 @@
         border: 1px solid black;
         text-align: center;
     }
-    button {s
+    button {
         text-align: center;
     }
     .button {
@@ -19,7 +19,7 @@
         text-align: center;
     }
 </style>
-<form action="/store/questions" method="post">
+<form action="{{ url('/store/questions') }}" method="post">
     <h1>Create Questions</h1>
     <table>
         <tr>
@@ -30,27 +30,42 @@
             <th>Answer</th>
             <th>Action</th>
         </tr>
-        <tr id="template" style="display: none;">
+        <tr id="template" style="display:none;">
             <td><input type="text" name="question[0]" placeholder="Enter Question"></td>
-            <td><input type="text" name="option[0][]" placeholder="Option 1"></td>
-            <td><input type="text" name="option[0][]" placeholder="Option 2"></td>
-            <td><input type="text" name="option[0][]" placeholder="Option 3"></td>
+            <div>
+                @error('question.*')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <td><input type="text" id="option1" name="option[0][]"  placeholder="Option 1"></td>
+            <td><input type="text"  id="option2" name="option[0][]"  placeholder="Option 2"></td>
+            <td><input type="text"  id="option3" name="option[0][]" placeholder="Option 3"></td>
+            <div>
+                @error('option.*.*')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
             <td>
-                <input type="radio" name="answer[0]" value="1"> 1
-                <input type="radio" name="answer[0]" value="2"> 2
-                <input type="radio" name="answer[0]" value="3"> 3
+                <input type="radio" id="one" name="answer[0]" value="1" > 1
+                <input type="radio" id="two" name="answer[0]" value="2" > 2
+                <input type="radio" id="three" name="answer[0]" value="3" > 3
             </td>
+            <div>
+                @error('answer.*')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
             <td>
                 <button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>
             </td>
         </tr>
     </table>
+    @csrf
     <div class="button">
         <button type="button" class="btn btn-success" onclick="addContent()">+ Add</button>
         <button type="submit" class="btn btn-success">SUBMIT</button>
     </div>
 </form>
-
 <script>
     let counter = 1;
 
@@ -83,6 +98,10 @@
         console.log(row);
         row.parentNode.removeChild(row);
     }
+
 </script>
 
 @endsection
+
+
+

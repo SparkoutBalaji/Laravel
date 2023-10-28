@@ -10,6 +10,7 @@
     }
 </style>
     <h1>Questions List</h1>
+
     <table>
         <tr>
             <th>S.NO</th>
@@ -20,5 +21,8 @@
             <th>Answer</th>
             <th>ACTION</th>
         </tr>
+        @foreach ( as )
+
+        @endforeach
     </table>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
@@ -28,20 +29,27 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-    $data = $request->all();
+        dd($request->all());
+        $questions = $request->input('question');
+        $options = $request->input('option');
+        $answers = $request->input('answer');
 
-    Question::create([
-        'question' => $data['question'][0],
-        'option1' => $data['option'][0][0],
-        'option2' => $data['option'][0][1],
-        'option3' => $data['option'][0][2],
-        'answer' => $data['answer'][0],
-    ]);
-
-    return redirect()->back()->with('success', 'Questions inserted successfully');
-}
-
+    for ($i = 1; $i < count($questions); $i++) {
+        $question = new Question();
+        $question->question = $questions[$i];
+        $question->option1 = $options[$i][0];
+        $question->option2 = $options[$i][1];
+        $question->option3 = $options[$i][2];
+        $question->answer = $answers[$i];
+        $question->save();
     }
+
+        return redirect(route('questions.list'))->with('success', 'Questions inserted successfully');
+    }
+
+
+
+
 
     /**
      * Display the specified resource.
