@@ -2,6 +2,8 @@
 @section('title','edit User')
 @section('content')
 <h1>Edit User</h1>
+<a href="{{ route('users.index') }}" class="btn btn-secondary">Back to List</a>
+<a href="{{ route('users.show', $user->id) }}" class="btn btn-info">View</a>
     <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -12,6 +14,7 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}">
