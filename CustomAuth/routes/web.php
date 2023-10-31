@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,3 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/',[CustomAuthController::class,'login'])->name('login');
+Route::get('/registration',[CustomAuthController::class,'registration'])->name('registration');
+
