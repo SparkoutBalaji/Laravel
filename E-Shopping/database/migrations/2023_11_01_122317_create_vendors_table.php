@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendors', function (Blueprint $table) { //name, email, password, shop_name, address, city, postal_code, profile_picture, is_verified, created_at, updated_at
+        Schema::create('vendors', function (Blueprint $table) { 
             $table->uuid('id');
             $table->string('name');
-            $table->unique('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('shop_name');
             $table->string('address');
