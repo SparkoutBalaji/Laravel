@@ -9,12 +9,18 @@
                     <div class="form-group">
                         <label for="email">EMAIL</label>
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" name="email" class="form-control" placeholder="Enter Email ID" value="">
+                        <input type="email" name="email" class="form-control @error('email') error @enderror" placeholder="Enter Email ID" value="">
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="password">PASSWORD</label>
                         <i class="fa-solid fa-key"></i>
-                        <input type="password" name="password" class="form-control" placeholder="Enter Password" value="">
+                        <input type="password" name="password" class="form-control @error('password') error @enderror" placeholder="Enter Password" value="">
+                            @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <button class="btn btn-block btn-primary" type="submit">Login</button>
