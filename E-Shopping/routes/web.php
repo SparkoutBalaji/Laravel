@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +17,18 @@ use App\Http\Controllers\AuthController;
 Route::view('/','index')->name('homepage');
 Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::get('/register',[AuthController::class,'register'])->name('register');
-Route::get('/admin/adminpanel',[AuthController::class,'authenticate'])->name('admin.adminpanel');
-Route::post('/login/user',[AuthController::class,'authenticate'])->name('login.authenticate');
 Route::post('/register',[AuthController::class,'registering_user'])->name('registering.user');
-Route::middleware(['auth', 'checkRole:1'])->group(function () {
 
-});
+Route::post('/login',[AuthController::class,'authenticate'])->name('login.authenticate');
 
-Route::middleware(['auth', 'checkRole:2'])->group(function () {
-    // Define routes for users with role 2 (default users)
+
+Route::middleware(['auth'])->group(function () {
+    // Logout route
+    Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+
+    // Routes for different user roles
+    Route::get('/admin/adminpanel', [AuthController::class,'admin'])->name('admin.adminpanel');
+    Route::get('/homepage', [AuthController::class,'user'])->name('homepage');
 });
 
 

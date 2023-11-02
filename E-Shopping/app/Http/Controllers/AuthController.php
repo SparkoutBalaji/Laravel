@@ -9,10 +9,12 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\CheckRole;
 
 class AuthController extends Controller
 {
     public function login(){
+
         return view('auth.login');
     }
     public function register(){
@@ -38,41 +40,31 @@ class AuthController extends Controller
         }
     }
 
-    public function authenticate(RequestValidation $request)
+    public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            if (auth()->user()->role == 1) {
-                return redirect()->route('admin.dashboard');
-            } elseif (auth()->user()->role == 2) {
-                return redirect()->route('user.dashboard');
-            }
-        }
+            $userRole = Auth::user()->role;
 
-        return redirect()->back()->with('error', 'Invalid credentials');
+            if ($userRole == '1') {
+                return redirect()->route('admin.adminpanel')->with('success', 'Logged in as an Admin');
+            } elseif ($userRole == '2') {
+                return redirect()->route('homepage')->with('success', 'Logged in as a User');
+            }
+        } else {
+            // Authentication failed
+            return back()->with('fail', 'Invalid credentials');
+        }
     }
 
-    public function authentication(RequestValidation $request){
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:8|max:25'
-        ]);
-        $user = User::where('email','=',$request->email)->first();
-        if($user){
-            if(Hash::check($request->password,$user->password)){
-                $request->session()->put('loginId',$user->id);
-                if($request->email == 'admin@admin.com'){
-                    return redirect(route('admin.panel'));
-                }else{
-                    return redirect(route('q.a'));
-                }
-            }else{
-                return back()->with('fail','Password not matched.! try again...');
-            }
-        }else{
-            return back()->with('fail','Password is not registered.!');
-        }
-
-}
+    public function admin(){
+        return view('admin.adminpanel');
+    }
+    public function user(){
+        return view('index');
+    }
+    public function logout(){
+        return 'Logout';
+    }
 }

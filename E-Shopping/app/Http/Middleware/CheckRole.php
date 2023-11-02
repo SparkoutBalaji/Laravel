@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AuthController;
 
 class CheckRole
 {
@@ -16,19 +18,31 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check()) {
-            $userRole = auth()->user()->role;
-
-            if ($userRole == 1) {
-                // Admin role
-                return view('admin.dashboard'); // Admin dashboard view
-            } elseif ($userRole == 2) {
-                // Regular user role
-                return view('home'); // E-shopping home page view
+        if (Auth::check()) {
+            $role = Auth::user()->role;
+            if ($role == '1') {
+                return redirect()->route('admin.adminpanel')->with('success', 'Logged in as an Admin');
+            } elseif ($role == '2') {
+                return redirect()->route('homepage')->with('success', 'Logged in as a User');
             }
-            else {
-                return back()->with('fail','un authenticated');
-            }
+        } else {
+            return back()->with('fail', 'No authentication!');
+        }
     }
 }
-}
+
+
+// if (Auth::check()) {
+//     $userRole = Auth::user()->role;
+
+//     if ($userRole == '1') { //1 is a admin
+//         // Admin role
+//         return redirect()->route('admin.adminpanel')->with('success', 'Logged in as an Admin');
+//     } elseif ($userRole == '2') { //2 is a user
+//         // Regular user role
+//         return redirect()->route('user.homepage')->with('success', 'Logged in as a User');
+//     } else {
+//         return redirect()->back()->with('fail', 'Unauthenticated');
+//     }
+// }
+// abort(401);
