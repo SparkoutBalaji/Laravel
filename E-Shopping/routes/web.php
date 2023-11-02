@@ -24,7 +24,7 @@ Route::post('/login',[AuthController::class,'authenticate'])->name('login.authen
 
 Route::middleware(['auth'])->group(function () {
     // Logout route
-    Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class,'logout'])->name('logout');
 
     // Routes for different user roles
     Route::get('/admin/adminpanel', [AuthController::class,'admin'])->name('admin.adminpanel');

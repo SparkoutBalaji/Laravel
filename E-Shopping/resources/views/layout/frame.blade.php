@@ -10,6 +10,36 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <div class="navbar">
+        <a href="{{ route('homepage') }}">E-Shopping</a>
+        <ul class="navbar">
+          @guest
+          <!-- Display login and registration links when not logged in -->
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('register') }}">Register</a>
+          </li>
+          @else
+          <!-- Display user dropdown menu when logged in -->
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ Auth::user()->name }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="userDropdown">
+                  @auth
+                  {{-- <li><a href="">Profile ({{ Auth::user()->name }})</a></li> --}}
+                  <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                  <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
+                      @csrf
+                  </form>
+                  @endauth
+              </div>
+          </li>
+          @endguest
+      </ul>
+      </div>
     @yield('content')
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

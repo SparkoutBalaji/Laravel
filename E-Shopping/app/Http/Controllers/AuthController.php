@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckRole;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -65,6 +66,10 @@ class AuthController extends Controller
         return view('index');
     }
     public function logout(){
-        return 'Logout';
+        Session::flush();
+
+        Auth::logout();
+
+        return Redirect('login');
     }
 }
