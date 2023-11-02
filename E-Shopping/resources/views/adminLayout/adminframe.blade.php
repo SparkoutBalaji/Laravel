@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="{{ url('/') }}">E-Shopping</a>
+        <a href="{{ route('homepage') }}">E-Shopping</a>
         <ul class="navbar">
           @guest
           <!-- Display login and registration links when not logged in -->

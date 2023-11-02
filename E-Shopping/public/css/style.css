@@ -20,3 +20,10 @@
       widows: 25px;
       height: 25px;
   }
+  .nav-link.active:hover {
+    background-color: orange; /* Change the background color on hover */
+    color: black; /* Change the text color on hover */
+  }
+  .card{
+    background-color: skyblue;
+  }
