@@ -28,4 +28,11 @@ class RequestValidation extends FormRequest
             'password_confirmation' => 'required|same:password',
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.name_regex' => 'The name field must contain only alphabetic characters a-z or A-Z.',
+            'email.email' => 'Please Enter a valid Email ID',
+        ];
+    }
 }

@@ -5,8 +5,7 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <h4>REGISTRATION</h4>
-                <form action="" method="post">
-
+                <form action="{{ route('registering.user') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="name">NAME</label>

@@ -4,8 +4,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <form action="">
+                <form action="{{ route('login.authenticate') }}" method="post">
                     <h4>LOGIN</h4>
+                    @csrf
                     <div class="form-group">
                         <label for="email">EMAIL</label>
                         <i class="fa-solid fa-envelope"></i>
