@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\CheckRole;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,7 @@ use App\Http\Middleware\CheckRole;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+*/      
 Route::view('/','index')->name('homepage');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -31,10 +32,15 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     // Logout route
     Route::post('/logout', [AuthController::class,'logout'])->name('logout');
-
     // Routes for different user roles
     Route::get('/admin/adminpanel', [AuthController::class,'admin'])->name('admin.adminpanel');
     Route::get('/homepage', [AuthController::class,'user'])->name('homepage');
 });
+
+Route::middleware(['auth','CheckRole:1'])->group(function(){
+    Route::resource('categories', CategoryController::class);
+});
+
+
 
 

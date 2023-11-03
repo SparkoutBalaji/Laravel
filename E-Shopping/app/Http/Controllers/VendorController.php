@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Vendor;
 
-class CategoryController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Category::all();
+        return Vendor::all();
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
+        $vendor = Vendor::create($request->all());
         return 'stored';
     }
 
@@ -37,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return Category::find($id);
+        return Vendor::find($id);
     }
 
     /**
@@ -53,8 +53,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = Category::findOrFail($id);
-        $category->update($request->all());
+        $vendor = Vendor::findOrFail($id);
+        $vendor->update($request->all());
         return 'updated';
     }
 
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        Category::findOrFail($id)->delete();
-        return response()->json(['message' => 'Category deleted'], 200);
+        Vendor::findOrFail($id)->delete();
+        return 'Vendor deleted';
     }
 }
