@@ -1,6 +1,17 @@
 @extends('layout.frame')
 @section('title','Registration')
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('fail'))
+    <div class="alert alert-danger">
+        {{ session('fail') }}
+    </div>
+@endif
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">

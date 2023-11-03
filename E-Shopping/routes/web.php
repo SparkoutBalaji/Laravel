@@ -15,12 +15,18 @@ use App\Http\Middleware\CheckRole;
 |
 */
 Route::view('/','index')->name('homepage');
-Route::get('/login',[AuthController::class,'login'])->name('login');
-Route::get('/register',[AuthController::class,'register'])->name('register');
-Route::post('/register',[AuthController::class,'registering_user'])->name('registering.user');
 
-Route::post('/login',[AuthController::class,'authenticate'])->name('login.authenticate');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'registering_user'])->name('registering.user');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
 
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'registering_user'])->name('registering.user');
+    Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
+});
 
 Route::middleware(['auth'])->group(function () {
     // Logout route
