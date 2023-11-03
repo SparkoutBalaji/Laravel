@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return 'view';
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return 'vendor.create';
     }
 
     /**

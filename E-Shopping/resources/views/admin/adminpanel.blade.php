@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="{{ route('vendors.index') }}">
                             Vendors
                         </a>
                     </li>

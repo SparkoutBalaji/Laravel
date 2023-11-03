@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\CheckRole;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ use App\Http\Controllers\CategoryController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/      
+*/
 Route::view('/','index')->name('homepage');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -38,8 +40,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth','CheckRole:1'])->group(function(){
+
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });
+Route::resource('vendors',VendorController::class);
 
 
 
