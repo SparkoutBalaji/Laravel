@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class VendorRequest extends FormRequest
 {
@@ -23,17 +24,18 @@ class VendorRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            // 'email' => ['required', 'string', 'email', Rule::unique('vendors', 'email')->ignore($this->route('vendor')),],
             'email' => 'required|string|email|unique:vendors,email',
-            'password' => 'required|string|min:8', // Adjust the minimum length as needed
+            'password' => 'required|string|min:8', 
             'shop_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'postal_code' => 'required|numeric',
-            'profile_picture' => 'image|mimes:png,jpg,jpeg|between:100,15000', // You can add more specific rules for file uploads
+            'profile_picture' => 'required|image|mimes:png,jpg,jpeg|between:100,15000',
         ];
     }
     public function messages()
-{
+    {
     return [
         'name.required' => 'The name field is required.',
         'email.required' => 'The email field is required.',

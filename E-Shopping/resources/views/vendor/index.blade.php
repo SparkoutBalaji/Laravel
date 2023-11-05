@@ -1,6 +1,14 @@
 @extends('vendorLayout.frame')
-
 @section('content')
+<style>
+    img{
+        width: 100%;
+        height: 100%;
+    }
+    .table.table-bordered {
+        width: 100%;
+    }
+    </style>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -44,8 +52,8 @@
             <td>{{ $vendor->address }}</td>
             <td>{{ $vendor->city }}</td>
             <td>{{ $vendor->postal_code }}</td>
-            {{-- <td><img src="{{ asset('storage/app/public/profile_picture' . $vendor->profile_picture) }}" alt="{{ $vendor->name }} Image"/></td> --}}
-            <td><img src="{{ asset('/storage/app/public/profile_pictures/'.$vendor->profile_picture) }}" alt="{{ $vendor->name }} Image"/></td>
+            <td><img src="{{ asset('storage/' . $vendor['profile_picture']) }}" alt="Profile Picture">
+            </td>
             <td>{{ $vendor->is_verified ? 'Yes' : 'No' }}</td>
             <td>
                 <form action="{{ route('vendors.destroy',$vendor->id) }}" method="POST">
@@ -64,6 +72,6 @@
         @endforeach
     </table>
 
-    {{-- {!! $vendors->links() !!} --}}
+    {!! $vendors->links() !!}
 
 @endsection

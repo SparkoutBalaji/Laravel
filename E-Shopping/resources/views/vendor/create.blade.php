@@ -18,7 +18,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
+                <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}">
             </div>
             @if ($errors->has('name'))
                 <div class="text-danger">
@@ -28,7 +28,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>
-                <input type="text" name="email" class="form-control" placeholder="Email">
+                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
             </div>
             @if ($errors->has('email'))
             <div class="text-danger">
@@ -38,7 +38,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Password:</strong>
-                <input type="password" name="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" class="form-control" placeholder="Password" value="{{ old('password') }}">
             </div>
             @if ($errors->has('password'))
             <div class="text-danger">
@@ -48,7 +48,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Shop Name:</strong>
-                <input type="text" name="shop_name" class="form-control" placeholder="Shop Name">
+                <input type="text" name="shop_name" class="form-control" placeholder="Shop Name" value="{{ old('shop_name') }}">
             </div>
             @if ($errors->has('shop_name'))
             <div class="text-danger">
@@ -58,7 +58,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Address:</strong>
-                <textarea name="address" class="form-control" id="address" cols="30" rows="6"></textarea>
+                <textarea name="address" class="form-control" id="address" cols="30" rows="6" value="{{ old('address') }}"></textarea>
             </div>
             @if ($errors->has('address'))
             <div class="text-danger">
@@ -68,7 +68,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>city:</strong>
-                <input type="text" name="city" class="form-control" placeholder="City">
+                <input type="text" name="city" class="form-control" placeholder="City" value="{{ old('city') }}">
             </div>
             @if ($errors->has('city'))
             <div class="text-danger">
@@ -78,7 +78,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>postal_code:</strong>
-                <input type="text" name="postal_code" class="form-control" placeholder="Postal Code">
+                <input type="text" name="postal_code" class="form-control" placeholder="Postal Code" value="{{ old('postal_code') }}">
             </div>
             @if ($errors->has('postal_code'))
             <div class="text-danger">

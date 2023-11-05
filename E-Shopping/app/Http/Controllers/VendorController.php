@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
 use App\Http\Requests\VendorRequest;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Mime\Part\File;
+use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Model;
 
 class VendorController extends Controller
 {
@@ -15,7 +20,6 @@ class VendorController extends Controller
     public function index()
     {
         $vendors = Vendor::latest()->paginate(5);
-        $vendors = Vendor::all();
         return view('vendor.index',compact('vendors'));
     }
 
@@ -30,29 +34,35 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(VendorRequest $request)
+    // {
+    //     $data =$request->validated();
+    //     if ($request->hasFile('profile_picture')) {
+    //         $uploadedFile = $request->file('profile_picture');
+    //         $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+    //         $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public');
+    //         $data['profile_picture'] = $path;
+    //     }
+    //     $vendor = Vendor::create($data);
+    //     return view('vendor.index')->with('success','Creating a New Vendor Successfully');
+    // }
     public function store(VendorRequest $request)
-    {
-        $data = $request->all();
+{
+    $data = $request->validated();
 
-        // Check if a file was uploaded for profile_picture
-        if ($request->hasFile('profile_picture')) {
-            // Get the uploaded file
-            $uploadedFile = $request->file('profile_picture');
-
-            // Generate a unique filename and store the file in a designated storage directory
-            $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
-            $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public'); // Assuming you're using the 'public' disk
-
-            // Save the file path in the $data array
-            $data['profile_picture'] = $path;
-        }
-
-        // Create the vendor with the updated $data array
-        $vendor = Vendor::create($data);
-
-        // Redirect to a success page or do other actions as needed
-        // You can also add a success message and redirect back to the form
+    if ($request->hasFile('profile_picture')) {
+        $uploadedFile = $request->file('profile_picture');
+        $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+        $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public'); // Use the same 'public' disk as the update action
+        $data['profile_picture'] = $path;
+        dd($path);
     }
+
+    $vendor = Vendor::create($data);
+
+    return redirect()->route('vendors.index')->with('success', 'Creating a New Vendor Successfully');
+}
+
 
 
 
@@ -61,7 +71,8 @@ class VendorController extends Controller
      */
     public function show(string $id)
     {
-        return Vendor::find($id);
+        $vendor = Vendor::find($id);
+        return view('vendor.show',compact('vendor'));
     }
 
     /**
@@ -69,18 +80,82 @@ class VendorController extends Controller
      */
     public function edit(string $id)
     {
-        return view('vendor.edit',['id'=>$id]);
+        $vendor = Vendor::find($id);
+        return view('vendor.edit',compact('vendor'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(VendorRequest $request, string $id)
-    {
-        $vendor = Vendor::findOrFail($id);
-        $vendor->update($request->all());
-        return 'updated';
+//     public function update(Request $request, string $id)
+//     {
+//         $request->validate([
+//             'name' => 'required|string|max:255',
+//             'email' => ['required', 'string', 'email', Rule::unique('vendors', 'email')->ignore($id)],
+//             'password' => 'required|string|min:8', // Adjust the minimum length as needed
+//             'shop_name' => 'required|string|max:255',
+//             'address' => 'required|string|max:255',
+//             'city' => 'required|string|max:255',
+//             'postal_code' => 'required|numeric',
+//         ]);
+
+//     $vendor = Vendor::find($id);
+
+//     if ($request->hasFile('profile_picture')) {
+//         // Handle profile picture update and validation
+//         $request->validate([
+//             'profile_picture' => 'image|mimes:png,jpg,jpeg|between:100,15000',
+//         ]);
+
+//         $uploadedFile = $request->file('profile_picture');
+//         $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+//         $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public');
+//         $data['profile_picture'] = $path;
+
+//         $vendor->profile_picture = $path;
+
+//         $request->request->remove('profile_picture');
+//     }
+
+//     // Update other vendor information (excluding 'profile_picture')
+//     $vendor->update($request->all());
+
+//     return redirect()->route('vendors.index')
+//         ->with('success', 'Vendor updated successfully');
+// }
+
+public function update(Request $request, string $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => ['required', 'string', 'email', Rule::unique('vendors', 'email')->ignore($id)],
+        'password' => 'required|string|min:8', // Adjust the minimum length as needed
+        'shop_name' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'postal_code' => 'required|numeric',
+    ]);
+
+    $vendor = Vendor::find($id);
+
+    if ($request->hasFile('profile_picture')) {
+        // Handle profile picture update and validation
+        $request->validate([
+            'profile_picture' => 'image|mimes:png,jpg,jpeg|between:100,15000',
+        ]);
+
+        $uploadedFile = $request->file('profile_picture');
+        $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+        $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public');
+        $vendor->profile_picture = $path;
+
+        $request->request->remove('profile_picture');
     }
+
+    // Update other vendor information (excluding 'profile_picture')
+    $vendor->update($request->all());
+
+    return redirect()->route('vendors.index')
+        ->with('success', 'Vendor updated successfully');
+}
+
 
     /**
      * Remove the specified resource from storage.
