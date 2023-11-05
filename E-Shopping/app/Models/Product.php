@@ -11,4 +11,8 @@ class Product extends Model
     use HasFactory;
     use HasUuids;
     protected $fillable = ['name', 'description', 'price'];
+    public function images() {
+        return $this->hasMany(ProductImage::class);
+    }
+
 }

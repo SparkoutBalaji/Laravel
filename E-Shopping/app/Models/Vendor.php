@@ -11,4 +11,5 @@ class Vendor extends Model
     use HasFactory;
     use HasUuids;
     protected $fillable = ['name', 'email', 'password', 'shop_name', 'address', 'city', 'postal_code', 'profile_picture'];
+
 }

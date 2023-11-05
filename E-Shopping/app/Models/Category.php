@@ -11,4 +11,5 @@ class Category extends Model
     use HasFactory;
     use HasUuids;
     protected $fillable = ['name', 'status'];
+
 }
