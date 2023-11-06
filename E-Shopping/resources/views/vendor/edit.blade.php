@@ -1,4 +1,4 @@
-@extends('vendorLayout.frame')
+@extends('vendorLayout.vendorframe')
 
 @section('content')
 <div class="col-lg-12 margin-tb">

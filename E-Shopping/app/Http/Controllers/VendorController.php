@@ -37,13 +37,14 @@ class VendorController extends Controller
      */
     public function store(VendorRequest $request)
     {
-    $data = $request->validated();
+        //dd($request->all());
+        $data = $request->validated();
 
         if ($request->hasFile('profile_picture')) {
             $uploadedFile = $request->file('profile_picture');
-            $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
-            $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public'); // Use the same 'public' disk as the update action
-            $data['profile_picture'] = $path;
+            $imageName = uniqid().'.'.$uploadedFile->extension();
+            $data['profile_picture'] = $imageName;
+            $request->profile_picture->move(public_path('profile_pictures'),$data['profile_picture']);
             //dd($path);
         }
 

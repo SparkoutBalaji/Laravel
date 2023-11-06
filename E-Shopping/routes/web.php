@@ -43,8 +43,9 @@ Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
 
 Route::get('/admin/dashboard',[AuthController::class,'admin'])->name('admin.dashboard');
-Route::get('/vendor/login',[AuthController::class,'vendorAuthenticate']);
+Route::post('/vendor/login',[AuthController::class,'vendorAuthenticate'])->name('vendor.authenticate');
 Route::get('/vendor/login',[AuthController::class,'vendorLogin'])->name('vendor.login');
+
 
 
 
