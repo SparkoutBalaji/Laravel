@@ -28,9 +28,10 @@
                   @auth
                   <li><a href=""> {{ Auth::user()->name }}</a></li>
                   <li><a href="{{ route('logout') }}">Logout</a></li>
-                  <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
-                      @csrf
-                  </form>
+                  <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    </form>
                   @endauth
               </div>
           </li>

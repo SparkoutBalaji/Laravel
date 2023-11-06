@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        $categorys = Category::all();
+        return view('categories.index', ['categorys' => $categorys]);
     }
 
     /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -28,8 +29,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'status' => 'required',
+        ]);
         $category = Category::create($request->all());
-        return 'stored';
+        $categorys = Category::all();
+        return view('categories.index',['categorys'=>$categorys]);
     }
 
     /**
@@ -45,7 +51,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('categories.edit', ['category' => $category]);
     }
 
     /**
@@ -55,7 +62,8 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->update($request->all());
-        return 'updated';
+        $categorys = Category::all();
+        return view('categories.index',['categorys' => $categorys]);
     }
 
     /**
@@ -64,6 +72,6 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         Category::findOrFail($id)->delete();
-        return response()->json(['message' => 'Category deleted'], 200);
+        return back()->with('success','Category deleted');
     }
 }

@@ -1,4 +1,5 @@
 @extends('vendorLayout.frame')
+@section('title','Vendors')
 @section('content')
 <style>
     img{
@@ -15,7 +16,7 @@
                 <h2>E - Shopping... Vendors</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('vendors.create') }}"> Create New Product</a>
+                <a class="btn btn-success" href="{{ route('categories.create') }}"> Create New Product</a>
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@ class VendorController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $vendors = Vendor::latest()->paginate(5);
@@ -34,34 +35,22 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(VendorRequest $request)
-    // {
-    //     $data =$request->validated();
-    //     if ($request->hasFile('profile_picture')) {
-    //         $uploadedFile = $request->file('profile_picture');
-    //         $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
-    //         $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public');
-    //         $data['profile_picture'] = $path;
-    //     }
-    //     $vendor = Vendor::create($data);
-    //     return view('vendor.index')->with('success','Creating a New Vendor Successfully');
-    // }
     public function store(VendorRequest $request)
-{
+    {
     $data = $request->validated();
 
-    if ($request->hasFile('profile_picture')) {
-        $uploadedFile = $request->file('profile_picture');
-        $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
-        $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public'); // Use the same 'public' disk as the update action
-        $data['profile_picture'] = $path;
-        dd($path);
-    }
+        if ($request->hasFile('profile_picture')) {
+            $uploadedFile = $request->file('profile_picture');
+            $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+            $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public'); // Use the same 'public' disk as the update action
+            $data['profile_picture'] = $path;
+            //dd($path);
+        }
 
     $vendor = Vendor::create($data);
 
     return redirect()->route('vendors.index')->with('success', 'Creating a New Vendor Successfully');
-}
+    }
 
 
 
@@ -84,53 +73,18 @@ class VendorController extends Controller
         return view('vendor.edit',compact('vendor'));
     }
 
-//     public function update(Request $request, string $id)
-//     {
-//         $request->validate([
-//             'name' => 'required|string|max:255',
-//             'email' => ['required', 'string', 'email', Rule::unique('vendors', 'email')->ignore($id)],
-//             'password' => 'required|string|min:8', // Adjust the minimum length as needed
-//             'shop_name' => 'required|string|max:255',
-//             'address' => 'required|string|max:255',
-//             'city' => 'required|string|max:255',
-//             'postal_code' => 'required|numeric',
-//         ]);
 
-//     $vendor = Vendor::find($id);
-
-//     if ($request->hasFile('profile_picture')) {
-//         // Handle profile picture update and validation
-//         $request->validate([
-//             'profile_picture' => 'image|mimes:png,jpg,jpeg|between:100,15000',
-//         ]);
-
-//         $uploadedFile = $request->file('profile_picture');
-//         $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
-//         $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public');
-//         $data['profile_picture'] = $path;
-
-//         $vendor->profile_picture = $path;
-
-//         $request->request->remove('profile_picture');
-//     }
-
-//     // Update other vendor information (excluding 'profile_picture')
-//     $vendor->update($request->all());
-
-//     return redirect()->route('vendors.index')
-//         ->with('success', 'Vendor updated successfully');
-// }
 
 public function update(Request $request, string $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => ['required', 'string', 'email', Rule::unique('vendors', 'email')->ignore($id)],
-        'password' => 'required|string|min:8', // Adjust the minimum length as needed
-        'shop_name' => 'required|string|max:255',
-        'address' => 'required|string|max:255',
-        'city' => 'required|string|max:255',
-        'postal_code' => 'required|numeric',
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'string', 'email', Rule::unique('vendors', 'email')->ignore($id)],
+            'password' => 'required|string|min:8', // Adjust the minimum length as needed
+            'shop_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'postal_code' => 'required|numeric',
     ]);
 
     $vendor = Vendor::find($id);
