@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Session;
+use App\Models\Vendor;
 
 class AuthController extends Controller
 {
@@ -59,8 +60,19 @@ class AuthController extends Controller
         }
     }
 
+    public function vendorAuthenticate(Request $request){
+        $credentials = $request->only('email','password');
+        if(Auth::attempt($credentials)){
+            $vendor = Auth::vendor();
+            return view('vendor.dashboard');
+        }
+    }
+
     public function admin(){
-        return view('admin.adminpanel');
+        return view('admin.dashboard');
+    }
+    public function vendorLogin(){
+        return view('vendor.login');
     }
     public function user(){
         return view('index');

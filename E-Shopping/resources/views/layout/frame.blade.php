@@ -16,6 +16,8 @@
           @guest
           <!-- Display login and registration links when not logged in -->
           <li class="nav-item">
+                <a class="nav-link" href="{{ route('vendor.login') }}">Vendor Login</a>
+          <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">Login</a>
           </li>
           <li class="nav-item">

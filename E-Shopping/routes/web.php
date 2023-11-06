@@ -42,6 +42,10 @@ Route::middleware(['auth','CheckRole:1'])->group(function(){
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
 
+Route::get('/admin/dashboard',[AuthController::class,'admin'])->name('admin.dashboard');
+Route::get('/vendor/login',[AuthController::class,'vendorAuthenticate']);
+Route::get('/vendor/login',[AuthController::class,'vendorLogin'])->name('vendor.login');
+
 
 
 

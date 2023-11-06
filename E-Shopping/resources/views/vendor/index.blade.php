@@ -1,4 +1,4 @@
-@extends('vendorLayout.frame')
+@extends('adminLayout.adminframe')
 @section('title','Vendors')
 @section('content')
 <style>
@@ -10,11 +10,10 @@
         width: 100%;
     }
     </style>
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>E - Shopping... Vendors</h2>
-            </div>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Vendors</h1>
+        </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('categories.create') }}"> Create New Product</a>
             </div>
