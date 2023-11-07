@@ -1,23 +1,22 @@
-@extends('vendorLayout.frame')
+@extends('vendorLayout.vendorframe')
 @section('content')
 <style>
     img{
-        width: 300px;
-        height: 500px;
+        width: 500px;
+        height: 350px;
     }
     .table.table-bordered {
         width: 100%;
     }
     </style>
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Show Vendor</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('vendors.index') }}"> Back</a>
-        </div>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Show Vendor</h1>
     </div>
-</div>
+    <div class="text-right float-right">
+        <a class="btn btn-success" href="{{ route('vendors.index') }}"> Back</a>
+    </div>
+<div>
 
 <table class="table table-bordered">
     <tr>
@@ -54,7 +53,7 @@
     </tr>
     <tr>
         <th>Profile Picture</th>
-        <td><img src="{{ asset('storage/' . $vendor['profile_picture']) }}" alt="Profile Picture"></td>
+        <td><img src="{{ asset('profile_pictures/'.$vendor->profile_picture) }}" alt="Profile Picture"></td>
     </tr>
     <tr>
         <th>Is Verified</th>

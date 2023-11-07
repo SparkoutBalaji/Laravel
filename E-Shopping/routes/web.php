@@ -17,7 +17,7 @@ use App\Http\Controllers\VendorController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::view('/','index')->name('homepage');
+Route::view('/','homepage')->name('homepage');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -36,13 +36,16 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth','CheckRole:1'])->group(function(){
 
-    Route::resource('categories', CategoryController::class);
-    Route::resource('products', ProductController::class);
+
 });
+
+Route::resource('categories', CategoryController::class);
+Route::resource('products', ProductController::class);
+
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
-
 Route::get('/admin/dashboard',[AuthController::class,'admin'])->name('admin.dashboard');
+
 Route::post('/vendor/login',[AuthController::class,'vendorAuthenticate'])->name('vendor.authenticate');
 Route::get('/vendor/login',[AuthController::class,'vendorLogin'])->name('vendor.login');
 

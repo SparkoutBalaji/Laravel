@@ -92,14 +92,14 @@ public function update(Request $request, string $id)
 
     if ($request->hasFile('profile_picture')) {
         // Handle profile picture update and validation
-        $request->validate([
+        $data = $request->validate([
             'profile_picture' => 'image|mimes:png,jpg,jpeg|between:100,15000',
         ]);
 
         $uploadedFile = $request->file('profile_picture');
-        $filename = uniqid() . '_' . $uploadedFile->getClientOriginalName();
-        $path = $uploadedFile->storeAs('profile_pictures', $filename, 'public');
-        $vendor->profile_picture = $path;
+        $imageName = uniqid().'.'.$uploadedFile->extension();
+        $data['profile_picture'] = $imageName;
+        $request->profile_picture->move(public_path('profile_pictures'),$data['profile_picture']);
 
         $request->request->remove('profile_picture');
     }

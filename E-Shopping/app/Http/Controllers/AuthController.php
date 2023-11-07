@@ -61,12 +61,26 @@ class AuthController extends Controller
     }
 
     public function vendorAuthenticate(Request $request){
-        $credentials = $request->only('email','password');
-        if(Auth::attempt($credentials)){
-            $vendor = Auth::vendor();
-            return view('vendor.dashboard');
+
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $vendor = Vendor::where('email', $email)->first();
+
+        if ($vendor) {
+            if ($password == $vendor->password) {
+                return view('vendor.dashboard',compact('vendor'));
+            } else {
+                return back()->with('fail', 'Invalid credentials');
+            }
+        } else {
+            return back()->with('fail', 'Vendor not found');
         }
     }
+
+
+
+
+
 
     public function admin(){
         return view('admin.dashboard');

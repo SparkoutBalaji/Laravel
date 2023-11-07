@@ -28,7 +28,7 @@
           <li class="nav-item dropdown">
               <div class="dropdown-menu" aria-labelledby="userDropdown">
                   @auth
-                  <li><a href=""> {{ Auth::user()->name }}</a></li>
+                  <li><a href=""> {{ Auth::user()->name || Vendor::user()->name }}</a></li>
                   <li><a href="{{ route('logout') }}">Logout</a></li>
                   <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -41,6 +41,6 @@
       </ul>
       </div>
     @yield('content')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous" defer></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </html>
