@@ -34,7 +34,7 @@
                 <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button type="submit" onclick="return confirm('Are you Sure Delete the Category')">Delete</button>
                 </form>
             </td>
         </tr>

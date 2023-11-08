@@ -1,4 +1,4 @@
-@extends('vendorLayout.vendorframe')
+@extends('adminLayout.adminframe')
 @section('title','Edit the Vendor')
 @section('content')
 <style>

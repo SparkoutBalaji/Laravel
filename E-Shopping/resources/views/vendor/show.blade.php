@@ -1,4 +1,4 @@
-@extends('vendorLayout.vendorframe')
+@extends('adminLayout.adminframe')
 @section('content')
 <style>
     img{

@@ -1,4 +1,4 @@
-@extends('vendorLayout.vendorframe')
+@extends('adminLayout.adminframe')
 @section('title','Vendors')
 @section('content')
 <style>
@@ -10,6 +10,7 @@
         width: 100%;
     }
     </style>
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Vendors</h1>
@@ -18,6 +19,11 @@
             <a class="btn btn-success" href="{{ route('vendors.create') }}"> Create New Vendor</a>
         </div>
 <div>
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+@endif
             <table class="table table-bordered">
                 <tr>
                     <th>#</th>
@@ -56,7 +62,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Sure Want Delete?')">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -66,11 +72,7 @@
 
     </div>
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+
 
 
 

@@ -1,4 +1,4 @@
-@extends('adminLayout.adminframe')
+@extends('vendorLayout.vendorframe')
 @section('title','Categories')
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -8,33 +8,36 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Category</a>
+            <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
         </div>
     </div>
 </div>
-<table>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>#</th>
             <th>ID</th>
             <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
             <th>Status</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($categorys as $category)
+        @foreach ($products as $product)
         <tr>
             <td>{{ $loop->iteration }}</td>
-            <td>{{ $category->id }}</td>
-            <td>{{ $category->name }}</td>
-            <td>{{ $category->status ? 'Active' : 'Inactive' }}</td>
+            <td>{{ $product->id }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->description }}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ $product->status ? 'Active' : 'Inactive' }}</td>
             <td>
-                <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
+                <a href="{{ route('products.edit', $product->id) }}">Edit</a>
+                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button type="submit" onclick="return confirm('Confirm Delete this Product')">Delete</button>
                 </form>
             </td>
         </tr>

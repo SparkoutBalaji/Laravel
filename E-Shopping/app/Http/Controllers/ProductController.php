@@ -11,9 +11,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function userProducts(){
+        return view('user.products');
+    }
     public function index()
     {
-        return 'view';
+        $products = Product::all();
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -21,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return 'vendor.create';
+        return view('products.create');
     }
 
     /**
@@ -29,7 +33,10 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        Product::create($request->validated());
+        $data = $request->validated();
+        $product = Product::create($data);
+        $products = Product::all();
+        return view('products.index',['products'=>$products]);
     }
 
     /**
@@ -37,30 +44,35 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return $product;
+        return Product::find($product);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.edit', ['product' => $product]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductRequest $request, string $id)
     {
-        $product->update($request->validated());
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+        $products = Product::all();
+        return view('products.index',['products' => $products]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(string $id)
     {
-        $product->delete();
+        Product::findOrFail($id)->delete();
+        return back()->with('success','Product Delete Successfully');
     }
 }

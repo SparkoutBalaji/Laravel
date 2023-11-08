@@ -52,7 +52,7 @@ class AuthController extends Controller
             if ($userRole == '1') {
                 return redirect()->route('admin.adminpanel')->with('success', 'Logged in as an Admin');
             } elseif ($userRole == '2') {
-                return redirect()->route('homepage')->with('success', 'Logged in as a User');
+                return redirect()->route('user.dashboard')->with('success', 'Logged in as a User');
             }
         } else {
             // Authentication failed
@@ -68,7 +68,7 @@ class AuthController extends Controller
 
         if ($vendor) {
             if ($password == $vendor->password) {
-                return view('vendor.dashboard',compact('vendor'));
+                return redirect()->route('vendor.dashboard')->with('success','Vendor Successfully login');
             } else {
                 return back()->with('fail', 'Invalid credentials');
             }
@@ -77,19 +77,18 @@ class AuthController extends Controller
         }
     }
 
-
-
-
-
-
     public function admin(){
         return view('admin.dashboard');
     }
     public function vendorLogin(){
         return view('vendor.login');
     }
-    public function user(){
-        return view('index');
+    public function userDashboard(){
+        $user = new User;
+        return view('user.dashboard',compact('user'));
+    }
+    public function vendorDashboard(){
+        return view('vendor.dashboard');
     }
     public function logout(){
         Session::flush();

@@ -118,6 +118,6 @@ public function update(Request $request, string $id)
     public function destroy(string $id)
     {
         Vendor::findOrFail($id)->delete();
-        return 'Vendor deleted';
+        return back()->with('success','Vendor Deleted.!');
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\CheckRole;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VendorController;
 
@@ -44,12 +45,16 @@ Route::resource('products', ProductController::class);
 
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
+Route::resource('orders',OrderController::class);
+
 Route::get('/admin/dashboard',[AuthController::class,'admin'])->name('admin.dashboard');
+Route::get('/user/dashboard',[AuthController::class,'userDashboard'])->name('user.dashboard');
+Route::get('/vendor/dashboard',[AuthController::class,'vendorDashboard'])->name('vendor.dashboard');
 
 Route::post('/vendor/login',[AuthController::class,'vendorAuthenticate'])->name('vendor.authenticate');
 Route::get('/vendor/login',[AuthController::class,'vendorLogin'])->name('vendor.login');
 
-
+Route::get('/user/products',[ProductController::class,'userProducts'])->name('user.products');
 
 
 
