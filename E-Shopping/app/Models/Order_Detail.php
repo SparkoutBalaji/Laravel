@@ -11,4 +11,10 @@ class Order_Detail extends Model
     use HasFactory;
     use HasUuids;
     protected $fillable = ['order_id', 'product_id', 'count'];
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -12,4 +12,7 @@ class Order extends Model
     use HasUuids;
     protected $fillable = [ 'user_id', 'amount', 'total_count', 'status'];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
