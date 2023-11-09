@@ -1,5 +1,5 @@
 @extends('vendorLayout.vendorframe')
-@section('title','Categories')
+@section('title','Products')
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -34,6 +34,7 @@
             <td>{{ $product->status ? 'Active' : 'Inactive' }}</td>
             <td>
                 <a href="{{ route('products.edit', $product->id) }}">Edit</a>
+                <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')

@@ -88,7 +88,8 @@ class AuthController extends Controller
         return view('user.dashboard',compact('user'));
     }
     public function vendorDashboard(){
-        return view('vendor.dashboard');
+        $vendor = new Vendor;
+        return view('vendor.dashboard',compact('vendor'));
     }
     public function logout(){
         Session::flush();

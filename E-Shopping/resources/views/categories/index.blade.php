@@ -12,7 +12,7 @@
         </div>
     </div>
 </div>
-<table>
+<table class="table table-border">
     <thead>
         <tr>
             <th>#</th>

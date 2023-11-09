@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -12,7 +13,9 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     public function userProducts(){
-        return view('user.products');
+        $categories = Category::all();
+        $products = Product::all();
+        return view('user.products',compact(['categories','products']));
     }
     public function index()
     {
@@ -42,9 +45,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(string $id)
     {
-        return Product::find($product);
+        $product = Product::find($id);
+        return view('products.show',compact('product'));
     }
 
     /**
@@ -73,6 +77,6 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         Product::findOrFail($id)->delete();
-        return back()->with('success','Product Delete Successfully');
+        return redirect()->route('products.index')->with('success','Product Delete Successfully');
     }
 }
