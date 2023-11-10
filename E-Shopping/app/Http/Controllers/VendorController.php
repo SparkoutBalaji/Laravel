@@ -5,15 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
 use App\Http\Requests\VendorRequest;
+use App\Mail\MailVerification;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Mime\Part\File;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class VendorController extends Controller
 {
+    public function mailVerification($id){
+        // Find the vendor by ID
+        $vendor = Vendor::find($id);
+
+        //dd($id);
+
+        // Check if the vendor was found
+        if (!$vendor) {
+            return redirect()->route('vendors.index')->with('error', 'Vendor not found.');
+        }
+
+        // Update the is_verified field to true
+        $vendor->is_verified = 1;
+        $vendor->save();
+
+        // Redirect with success message
+        return redirect()->route('vendors.index')->with('success', 'Vendor Email Verified Successfully!');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -49,7 +71,8 @@ class VendorController extends Controller
         }
 
     $vendor = Vendor::create($data);
-
+    $data['id'] = $vendor->id;
+    Mail::to($data['email'])->send(new MailVerification($data));
     return redirect()->route('vendors.index')->with('success', 'Creating a New Vendor Successfully');
     }
 

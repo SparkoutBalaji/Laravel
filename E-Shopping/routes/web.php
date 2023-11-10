@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VendorController;
+use App\Models\Vendor;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,6 @@ Route::post('/vendor/login',[AuthController::class,'vendorAuthenticate'])->name(
 Route::get('/vendor/login',[AuthController::class,'vendorLogin'])->name('vendor.login');
 
 Route::get('/user/products',[ProductController::class,'userProducts'])->name('user.products');
-
+Route::get("/mail/verified/{id}",[VendorController::class,'mailVerification'])->name('mail.verified');
 
 

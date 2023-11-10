@@ -6,7 +6,7 @@
         <h1 class="h2">Vendors</h1>
     </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('vendors.index') }}"> Back</a>
         </div>
         <form action="{{ route('vendors.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
