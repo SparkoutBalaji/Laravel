@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->tinyInteger('age')->unsigned();
-            $table->string('email')->unique();
-            $table->bigInteger('phone')->unique();
+            $table->string('name')->default('balaji');
+            $table->tinyInteger('age')->unsigned()->default(18);
+            $table->string('email')->unique()->default('balaji@gmail.com');
+            $table->bigInteger('phone')->default(9976329694);
             $table->timestamps();
         });
     }

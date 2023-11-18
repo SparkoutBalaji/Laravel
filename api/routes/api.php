@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\UserApiController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\UserApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,4 +19,11 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::get('/users',[UserApiController::class,'users']);
+Route::get('/users',[UserApiController::class,'index'])->name('users');
+Route::post('/users/create',[UserApiController::class,'store'])->name('users.store');
+Route::put('/users/update',[UserApiController::class,'update'])->name('users.update');
+Route::post('/users/show',[UserApiController::class,'show'])->name('users.show');
+Route::delete('/users/destroy',[UserApiController::class,'destroy'])->name('users.destroy');
+
+
+
