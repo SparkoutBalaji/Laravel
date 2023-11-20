@@ -21,10 +21,10 @@ class UserApiController extends Controller
 
         $user = User::find($request->id);
         //dd($user);
-        $user->name = $request->name;
-        $user->age = $request->age;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
+        $user->name = $request->input('name', $user->name);
+        $user->age = $request->input('age', $user->age);
+        $user->email = $request->input('email', $user->email);
+        $user->phone = $request->input('phone', $user->phone);
         $user->save();
         return response()->json(
             $user

@@ -15,10 +15,6 @@ use App\Http\Controllers\Api\UserApiController;
 |
 */
 
-/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
 Route::get('/users',[UserApiController::class,'index'])->name('users');
 Route::post('/users/create',[UserApiController::class,'store'])->name('users.store');
 Route::put('/users/update',[UserApiController::class,'update'])->name('users.update');
